@@ -1,0 +1,37 @@
+name: Luna auto merge
+
+on:
+  workflow_run:
+    workflows: ["PR validation"]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.pull_requests[0].number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge verified pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if gh api               --method PUT               -H "Accept: application/vnd.github+json"               "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER/merge"               -f merge_method=squash               -f sha="$HEAD_SHA"; then
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              sleep $((attempt * 5))
+            fi
+          done
+          echo "Merge failed after 3 attempts" >&2
+          exit 1
