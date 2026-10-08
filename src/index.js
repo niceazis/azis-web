@@ -1,5 +1,14 @@
+import { analyze, isConfigured, json } from "./analyze.js";
+
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.pathname === "/api/status") {
+      if (request.method !== "GET") return json({ error: "Use GET." }, 405, { allow: "GET" });
+      return json({ claudeConfigured: isConfigured(env) });
+    }
+    if (url.pathname === "/api/analyze") return analyze(request, env);
+    if (url.pathname.startsWith("/api/")) return json({ error: "API route not found." }, 404);
     const assetResponse = await env.ASSETS.fetch(request);
 
     // Keep every real AZIS site asset and route on azis.net.

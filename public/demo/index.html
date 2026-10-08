@@ -55,7 +55,7 @@
       <div class="eyebrow">Proactive Team Agent · Interactive concept demo</div>
       <h1>An AI teammate that keeps work moving.</h1>
       <p class="lead">Watch a simulated team conversation unfold. AZIS highlights a missing handoff, suggests a next step, and demonstrates an approval-gated action.</p>
-      <div class="notice"><strong>Concept simulation — not a live AI agent.</strong> All team messages are fictional. Suggestions use predefined scenarios or basic text pattern matching in your browser. Approve, dismiss, and simulated execution only update this page; no messages are sent, no tasks are created, and no external APIs or AI models are called.</div>
+      <div class="notice"><strong>Concept simulation — not a live AI agent.</strong> All team messages are fictional. Suggestions use predefined scenarios or basic text pattern matching in your browser. Approve, dismiss, and simulated execution only update this page; no messages are sent, no tasks are created, and no external APIs or AI models are called by these simulation controls. The separate Claude preview below sends text only when you select “Analyze with Claude.”</div>
       <div class="mode" style="margin-top:24px">
         <label for="scenario">Team scenario</label>
         <select id="scenario">
@@ -77,6 +77,20 @@
           <div id="suggestions" aria-live="polite"><p class="empty">Choose a scenario and select “Show proactive suggestions.”</p></div>
         </section>
       </div>
+      <section class="panel" style="margin-top:34px" aria-labelledby="claude-title">
+        <div class="panel-title"><strong id="claude-title">Claude follow-up review</strong><span class="badge" id="claude-status">Checking preview availability</span></div>
+        <p class="mini">A separate AI analysis preview for project managers and team leads. Select a fictional case or paste a dated conversation. Review source evidence, accept or dismiss a suggestion, and copy an editable draft to send yourself.</p>
+        <p class="notice">Selecting “Analyze with Claude” sends the text through AZIS to Anthropic for analysis. Use fictional or non-sensitive text you are authorized to share. AZIS does not store conversation text in a database. Hosting and provider logging or retention follow their own settings. No messages are sent and no team tools are changed.</p>
+        <div class="mode" style="margin-top:18px"><label for="review-case">Fictional validation case</label><select id="review-case"><option value="">Loading cases</option></select><button id="load-review-case">Load case</button></div>
+        <label class="mini" for="review-input" style="display:block;margin-top:18px">Conversation · include dates and senders · maximum 8,000 characters</label>
+        <textarea id="review-input" maxlength="8000" style="min-height:180px"></textarea>
+        <label class="mini" for="review-access" style="display:block;margin-top:14px">Reviewer access code · issued by AZIS · do not enter an Anthropic API key</label>
+        <input id="review-access" type="password" maxlength="256" autocomplete="off" style="width:100%;padding:12px;background:#0a120f;border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit" />
+        <div class="actions"><button class="primary" id="review-analyze" disabled>Analyze with Claude</button><button id="review-clear">Clear review</button></div>
+        <p class="mini" id="review-help">The public simulation above remains available without reviewer access.</p>
+        <div id="review-output" aria-live="polite"></div>
+        <p class="mini"><a href="https://github.com/niceazis/azis-web/blob/main/docs/validation.md" target="_blank" rel="noopener noreferrer">Validation criteria &amp; development evidence</a></p>
+      </section>
       <section style="padding:34px 0 0">
         <div class="panel">
           <div class="panel-title"><strong>Try your own update</strong><span class="badge">Simple pattern matching · Not AI</span></div>
@@ -132,5 +146,6 @@
     document.getElementById('clear').addEventListener('click',()=>{document.getElementById('input').value='';custom.textContent='';});
     reset();
   </script>
+  <script type="module" src="/demo/review.js"></script>
 </body>
 </html>

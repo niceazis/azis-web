@@ -52,17 +52,11 @@ jobs:
         if: steps.changes.outputs.full_test != 'true'
         run: echo "Docs-only change detected; skipping dependency installation and runtime tests."
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-node@v4
         if: steps.changes.outputs.full_test == 'true'
         with:
-          python-version: '3.x'
+          node-version: '22'
 
-      - name: Run tests
+      - name: Run Worker tests
         if: steps.changes.outputs.full_test == 'true'
-        shell: bash
-        run: |
-          if [ -d tests ]; then
-            python3 -m unittest discover -s tests -v
-          else
-            echo "No tests/ directory yet; nothing to run."
-          fi
+        run: npm test

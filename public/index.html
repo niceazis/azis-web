@@ -26,11 +26,9 @@
         "@type": "Organization",
         "@id": "https://azis.net/#organization",
         "name": "AZIS",
-        "legalName": "AZIS",
-        "description": "Independent software startup operating as a sole proprietorship in Seoul, South Korea.",
+        "description": "Early-stage software venture in Seoul, South Korea; business registration is planned.",
         "url": "https://azis.net/",
         "email": "azis@azis.net",
-        "foundingDate": "2026-08",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Seoul",
@@ -101,10 +99,10 @@
           <div class="cta-row"><a class="button primary" href="/demo/">Try the prototype</a><a class="button" href="#product">See how it works</a></div>
         </div>
         <aside class="hero-card" aria-label="Illustrative proactive suggestions">
-          <div class="source">Example input</div>
+          <div class="source">Illustrative input · Friday launch is assumed, approval status is unknown</div>
           <div class="msg">Sarah will approve the final design by Friday.</div><div class="msg">Minho needs to update pricing after approval.</div><div class="msg">Launch may slip if approval is delayed.</div>
           <div class="arrow">↓</div>
-          <div class="signal-grid"><div class="signal"><span>Signal</span><strong>Pricing update is waiting on design approval</strong></div><div class="signal"><span>Noticed</span><strong>Sarah hasn&#39;t confirmed; launch Friday is at risk</strong></div><div class="signal"><span>Suggested</span><strong>Ask Sarah to confirm approval by Thursday</strong></div><div class="signal"><span>Needs approval</span><strong>Send follow-up to Sarah</strong><div class="approval-options" aria-label="Illustrative approval options"><span>Approve</span><span>Dismiss</span></div></div></div>
+          <div class="signal-grid"><div class="signal"><span>Signal</span><strong>Pricing update is waiting on design approval</strong></div><div class="signal"><span>Noticed</span><strong>Approval status is unknown; confirm readiness for the assumed Friday launch</strong></div><div class="signal"><span>Suggested</span><strong>Suggest a Thursday check-in with Sarah; timing needs review</strong></div><div class="signal"><span>Needs approval</span><strong>Send follow-up to Sarah</strong><div class="approval-options" aria-label="Illustrative approval options"><span>Approve</span><span>Dismiss</span></div></div></div>
         </aside>
       </header>
       <section id="problem">
@@ -120,21 +118,26 @@
           <div class="flow-step"><span>04 · Act</span><strong>Execute with consent</strong><p>Planned: carry out permitted actions with approvals, controls, and audit trails.</p></div>
         </div>
         <div class="product" style="margin-top:18px">
-          <div class="product-main"><h3>Proactive Team Agent Demo</h3><p>Explore sample team scenarios for proactive follow-up suggestions, or paste your own work update to try basic rule-based suggestions in the browser.</p><div class="cta-row"><a class="button primary" href="/demo/">Open prototype</a></div></div>
-          <div class="product-side"><div><div class="kicker">Available today vs. vision</div><p style="margin-top:10px">Public proof of concept. Text is processed locally in your browser using keyword and pattern matching, not an AI model. Suggestions may be incomplete or inaccurate. Integrations and AI-powered analysis are planned, not part of this demo.</p></div><span class="status">Prototype · 2026</span></div>
+          <div class="product-main"><h3>Proactive Team Agent Demo</h3><p>Explore fictional team scenarios, then paste a dated work update to try local pattern matching. A separate Claude analysis preview is implemented and requires server configuration and reviewer access.</p><div class="cta-row"><a class="button primary" href="/demo/">Open prototype</a></div></div>
+          <div class="product-side"><div><div class="kicker">Available today vs. vision</div><p style="margin-top:10px">Public simulation: predefined scenarios and local pattern matching. Claude preview: server implementation available, activation and live evaluation pending. Slack, Teams, email connections, and automatic execution remain planned.</p></div><span class="status">Prototype · 2026</span></div>
         </div>
+        <div class="product" style="margin-top:18px">
+          <div class="product-main"><h3>First product: follow-up review</h3><p>Paste a dated team conversation. Review possible approval blockers, missing owners, and dependencies with supporting source quotes. Accept or dismiss a suggestion, then copy a follow-up draft to send yourself.</p><div class="cta-row"><a class="button" href="https://github.com/niceazis/azis-web" target="_blank" rel="noopener noreferrer">View source &amp; development status</a><a class="button" href="https://github.com/niceazis/azis-web/blob/main/docs/validation.md" target="_blank" rel="noopener noreferrer">See 10 fictional validation cases</a></div></div>
+          <div class="product-side"><div><div class="kicker">Claude integration</div><p style="margin-top:10px">The next evaluation uses Claude to interpret work context, identify possible follow-up gaps, and draft a next step. Quoted evidence is checked against the input; missing facts remain unknown. Users review every suggestion. The preview does not send messages or change team tools.</p></div><span class="status">Implemented in source · Live activation pending</span></div>
+        </div>
+        <div class="problem-grid" style="margin-top:18px"><article class="card"><div class="num">Available now</div><h3>Public concept demo</h3><p>Fictional scenarios, local pattern matching, and simulated approvals. No AI calls in simulation mode.</p></article><article class="card"><div class="num">Next validation</div><h3>Claude analysis preview</h3><p>Server code and review interface are implemented. Real model evaluation and customer validation have not been completed.</p></article><article class="card"><div class="num">Longer-term plan</div><h3>Connected team agent</h3><p>Authorized tool connections, recurring checks, approval-based execution, and audit history. These are not current capabilities.</p></article></div>
       </section>
       <section id="use-cases">
-        <div class="section-head"><div class="kicker">Use cases</div><div><h2>Where a proactive teammate could help.</h2></div></div>
-        <div class="use-grid"><article class="card"><h3>Team operations</h3><p>Planned: surface forgotten handoffs and proactively request confirmation from the right people.</p></article><article class="card"><h3>Project tracking</h3><p>Planned: flag blockers early, suggest next steps, and update approved tracking systems.</p></article><article class="card"><h3>Knowledge workflows</h3><p>Planned: keep decisions and project context connected across authorized team sources.</p></article></div>
+        <div class="section-head"><div class="kicker">Use cases</div><div><h2>Start with release follow-up.</h2><p class="section-copy">Our initial target is project managers and team leads at software teams of 5–30 people. Before a release, they need to see which approvals or handoffs are unresolved and whom to contact next. This is our target customer profile, not a claim of existing customers.</p></div></div>
+        <div class="use-grid"><article class="card"><h3>Team operations</h3><p>Initial focus: review approval handoffs and prepare a confirmation request for the relevant teammate.</p></article><article class="card"><h3>Project tracking</h3><p>Initial focus: review dependencies before a release and draft a follow-up with source evidence. Connected tracking updates are planned.</p></article><article class="card"><h3>Knowledge workflows</h3><p>Planned: keep decisions and project context connected across authorized team sources.</p></article></div>
       </section>
       <section id="company">
-        <div class="section-head"><div class="kicker">Company</div><div><h2>AZIS is an independent software startup based in South Korea.</h2><p class="section-copy">Founded in August 2026, we are developing a proactive team agent focused on shared context, timely follow-up, and controlled execution.</p></div></div>
-        <div class="facts"><div class="fact"><span class="label">Company</span><strong>AZIS</strong></div><div class="fact"><span class="label">Legal entity</span><strong>Sole Proprietorship (Republic of Korea)</strong></div><div class="fact"><span class="label">Founded</span><strong>2026-08</strong></div><div class="fact"><span class="label">Location</span><strong>Seoul, South Korea</strong></div><div class="fact"><span class="label">Founder</span><strong>MyoungGee Back, Founder &amp; CEO</strong></div><div class="fact"><span class="label">GitHub</span><strong><a href="https://github.com/niceazis" target="_blank" rel="noopener noreferrer">github.com/niceazis</a></strong></div><div class="fact"><span class="label">Website</span><strong><a href="https://azis.net">azis.net</a></strong></div><div class="fact"><span class="label">Email</span><strong><a href="mailto:azis@azis.net">azis@azis.net</a></strong></div></div>
+        <div class="section-head"><div class="kicker">Company</div><div><h2>AZIS is an early-stage software venture based in South Korea.</h2><p class="section-copy">Our project began in August 2026. We are developing a proactive team agent for small software teams. Business registration in South Korea is planned; AZIS is not currently presented as a registered business.</p></div></div>
+        <div class="facts"><div class="fact"><span class="label">Company</span><strong>AZIS</strong></div><div class="fact"><span class="label">Business registration</span><strong>Business registration planned (South Korea)</strong></div><div class="fact"><span class="label">Project started</span><strong>2026-08</strong></div><div class="fact"><span class="label">Location</span><strong>Seoul, South Korea</strong></div><div class="fact"><span class="label">Founder</span><strong>MyoungGee Back, Founder &amp; CEO</strong></div><div class="fact"><span class="label">GitHub</span><strong><a href="https://github.com/niceazis" target="_blank" rel="noopener noreferrer">github.com/niceazis</a></strong></div><div class="fact"><span class="label">Website</span><strong><a href="https://azis.net">azis.net</a></strong></div><div class="fact"><span class="label">Email</span><strong><a href="mailto:azis@azis.net">azis@azis.net</a></strong></div></div>
       </section>
       <section id="contact"><div class="contact-box"><div><div class="kicker">Contact</div><h2>Talk to AZIS.</h2><p>Product, technical, or partnership inquiries.</p></div><a class="button primary" href="mailto:azis@azis.net">azis@azis.net</a></div></section>
     </main>
-    <footer><div class="footer-row"><span>© 2026 AZIS · Sole Proprietorship (Republic of Korea) · Seoul, South Korea · <a href="mailto:azis@azis.net">azis@azis.net</a></span></div></footer>
+    <footer><div class="footer-row"><span>© 2026 AZIS · Business registration planned (South Korea) · Seoul, South Korea · <a href="mailto:azis@azis.net">azis@azis.net</a></span></div></footer>
   </div>
 </body>
 </html>
