@@ -89,3 +89,9 @@ Cloudflare credentials and Anthropic secrets are not part of this repository. Re
 - [Fictional case data](public/demo/cases.json)
 
 These materials demonstrate implementation and a reproducible evaluation plan, not customer traction or Anthropic program acceptance.
+
+## Reproducible live evaluation
+
+`npm run evaluate` records real Claude responses for all ten fictional cases; it requires `ANTHROPIC_API_KEY` and `ANTHROPIC_MODEL` in the process environment. The [validation guide](docs/validation.md#record-actual-claude-responses) also documents a hosted route using an AZIS reviewer code.
+
+The public `/evidence/` page renders the recorded report, including errors and human-review status. No actual run or model pass result is claimed until credentials are configured and the evaluation is executed. The checked-in report remains explicitly pending.

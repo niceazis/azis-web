@@ -39,3 +39,27 @@ npm test
 The tests verify that unauthorized input cannot call the provider; malformed or oversized data is rejected; the API key stays server-side; unsupported evidence/facts are rejected; failures are sanitized; and static and legacy blog routes are preserved.
 
 They **do not** measure Claude's reasoning quality, customer demand, or the state of production secrets.
+
+## Record actual Claude responses
+
+The runner executes all ten fictional cases sequentially and writes actual outputs plus sanitized failures to `public/evidence/results.json` and a matching Markdown report. `/evidence/` renders that report. Until a real run is made, the checked-in report explicitly says `pending`.
+
+### Deployed preview
+
+After the Worker is configured, place the reviewer access code in the ignored `.dev.vars` file. The hosted runner sends only that reviewer code to `https://azis.net`, never your Anthropic key. It waits 13 seconds between requests to respect the preview's approximate rate limit.
+
+```sh
+node --env-file=.dev.vars scripts/evaluate.js --base-url https://azis.net
+```
+
+### Direct provider evaluation
+
+For local evaluation, put your Anthropic key in the ignored `.dev.vars` file and choose the model:
+
+```sh
+ANTHROPIC_MODEL=claude-haiku-4-5 node --env-file=.dev.vars scripts/evaluate.js
+```
+
+Both paths make **real, billable Claude requests**. They do not generate synthetic model outputs. Missing credentials stop the runner before analysis and do not create a result report. A recorded response is marked `not_reviewed`, never automatically passed. Quote validation only checks literal support; inspect actual context and all acceptance criteria before claiming quality.
+
+After reviewing the generated report, commit only the report files, never `.dev.vars`. The evidence page will then display the actual recorded responses and outstanding human review status. Do not publish real company conversations; this runner is intended for the provided fictional cases.
