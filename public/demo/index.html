@@ -3,128 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AZIS Demo — Workflow Analyzer</title>
-  <meta name="description" content="Interactive prototype of an AI workflow analyzer by AZIS. Runs entirely in the browser with no external API calls." />
+  <title>AZIS Prototype — Workflow Analyzer</title>
+  <meta name="description" content="Try the AZIS Workflow Analyzer prototype. It structures work notes into tasks, owners, deadlines, completed items, and risks." />
   <style>
-    :root {
-      --bg:#0b0d10; --panel:#12161b; --text:#f3f5f7; --muted:#9da7b3;
-      --line:#242b33; --accent:#d9ff63; --max:1080px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
-    a{color:inherit}
-    .wrap{width:min(calc(100% - 40px),var(--max));margin:0 auto}
-    nav{display:flex;justify-content:space-between;align-items:center;min-height:76px;border-bottom:1px solid var(--line)}
-    .brand{font-weight:800;letter-spacing:.14em;text-decoration:none}
-    .back{color:var(--muted);text-decoration:none;font-size:14px}
-    main{padding:64px 0 80px}
-    .eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-    h1{font-size:clamp(36px,6vw,64px);line-height:1.02;letter-spacing:-.04em;margin:14px 0 18px}
-    .lead{color:var(--muted);font-size:18px;max-width:760px}
-    .notice{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:14px}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
-    .panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:22px}
-    label{display:block;font-weight:700;margin-bottom:10px}
-    textarea{width:100%;min-height:300px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:#0f1318;color:var(--text);padding:14px;font:inherit}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    button{border:1px solid var(--line);border-radius:10px;padding:11px 15px;font:inherit;font-weight:700;cursor:pointer;background:#171c22;color:var(--text)}
-    button.primary{background:var(--accent);border-color:var(--accent);color:#0a0c0f}
-    .result-section{margin-bottom:18px}
-    .result-section h3{font-size:14px;margin:0 0 7px;color:var(--accent)}
-    .result-section p,.result-section ul{margin:0;color:#d8dde3}
-    .result-section ul{padding-left:20px}
-    .empty{color:var(--muted)}
-    footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:13px}
-    @media(max-width:800px){.grid{grid-template-columns:1fr}main{padding-top:42px}}
+    :root{--bg:#09100e;--panel:#0f1714;--panel2:#121d19;--text:#f2f7f4;--muted:#9cada4;--line:#223029;--accent:#d9ff63;--max:1120px}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}a{color:inherit}.wrap{width:min(calc(100% - 40px),var(--max));margin:0 auto}
+    nav{display:flex;justify-content:space-between;align-items:center;min-height:76px;border-bottom:1px solid var(--line)}.brand{font-weight:900;letter-spacing:.16em;text-decoration:none}.back{color:var(--muted);text-decoration:none;font-size:14px}
+    main{padding:62px 0 80px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}h1{font-size:clamp(38px,6vw,66px);line-height:1.02;letter-spacing:-.045em;margin:14px 0 18px}.lead{color:var(--muted);font-size:18px;max-width:790px}.notice{margin:24px 0 0;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-size:14px}
+    .workspace{display:grid;grid-template-columns:.92fr 1.08fr;gap:18px;margin-top:30px}.panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:22px}.panel-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px}.panel-title strong{font-size:15px}.badge{font-size:11px;color:var(--muted);padding:5px 8px;border:1px solid var(--line);border-radius:999px}
+    textarea{width:100%;min-height:360px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:#0a120f;color:var(--text);padding:14px;font:inherit}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}button{border:1px solid var(--line);border-radius:10px;padding:11px 15px;font:inherit;font-weight:750;cursor:pointer;background:#15201b;color:var(--text)}button.primary{background:var(--accent);border-color:var(--accent);color:#090d0a}
+    .overview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.metric{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}.metric span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.metric strong{display:block;margin-top:3px;font-size:18px}.result-section{padding:15px 0;border-top:1px solid var(--line)}.result-section:first-of-type{border-top:0}.result-section h3{font-size:12px;margin:0 0 8px;color:var(--accent);letter-spacing:.08em}.result-section p,.result-section ul{margin:0;color:#d9e1dc}.result-section ul{padding-left:20px}.empty{color:var(--muted)}footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:13px}
+    @media(max-width:860px){.workspace{grid-template-columns:1fr}.overview{grid-template-columns:1fr 1fr}main{padding-top:42px}}@media(max-width:560px){.overview{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <nav>
-      <a class="brand" href="/">AZIS</a>
-      <a class="back" href="/">← Back to company site</a>
-    </nav>
+    <nav><a class="brand" href="/">AZIS</a><a class="back" href="/">← Back to AZIS</a></nav>
     <main>
-      <div class="eyebrow">Interactive product prototype</div>
+      <div class="eyebrow">Public product prototype</div>
       <h1>Workflow Analyzer</h1>
-      <p class="lead">Paste a work note, message thread, or task update. The prototype turns it into a structured action view with summary, tasks, owners, deadlines, and risks.</p>
-      <div class="notice"><strong>Prototype mode:</strong> this demo makes no external API calls. Processing happens locally in your browser. It demonstrates the product workflow and interface intended for future Claude integration.</div>
-
-      <div class="grid">
+      <p class="lead">Paste a project update, email thread, or meeting note. The prototype organizes it into a concise action view so you can see what needs attention.</p>
+      <div class="notice"><strong>Prototype mode:</strong> no external API calls are made. Processing happens entirely in your browser. This interface demonstrates the workflow AZIS is validating before deeper model integration.</div>
+      <div class="workspace">
         <section class="panel">
-          <label for="input">Work input</label>
-          <textarea id="input" placeholder="Example: Minho will send the revised proposal by Friday. We still need design approval from Sarah. If approval slips, the launch could move to next week."></textarea>
-          <div class="actions">
-            <button class="primary" id="analyze">Analyze workflow</button>
-            <button id="sample">Load sample</button>
-            <button id="clear">Clear</button>
-          </div>
+          <div class="panel-title"><strong>Work input</strong><span class="badge">Local only</span></div>
+          <textarea id="input" placeholder="Paste a work update here..."></textarea>
+          <div class="actions"><button class="primary" id="analyze">Analyze workflow</button><button id="sample">Load sample</button><button id="clear">Clear</button></div>
         </section>
-
-        <section class="panel" id="output">
-          <div class="empty">Analysis results will appear here.</div>
-        </section>
+        <section class="panel" id="output"><div class="panel-title"><strong>Action view</strong><span class="badge">Structured output</span></div><div class="empty">Load the sample or paste your own text to see the action view.</div></section>
       </div>
     </main>
-
     <footer>AZIS · South Korea · <a href="mailto:azis@azis.net">azis@azis.net</a></footer>
   </div>
-
   <script>
-    const input = document.getElementById('input');
-    const output = document.getElementById('output');
-
-    const sample = 'Minho will send the revised proposal by Friday. We still need design approval from Sarah. If approval slips, the launch could move to next week. Jisoo has already completed the pricing review. Please confirm the final launch date after approval.';
-
-    function esc(s) {
-      return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    function analyzeText(text) {
-      const clean = text.trim();
-      if (!clean) return null;
-
-      const sentences = clean.split(/(?<=[.!?])\s+/).filter(Boolean);
-      const taskWords = /(will|need|must|should|please|send|confirm|review|approve|complete|finish|deliver|update|prepare|check)/i;
-      const doneWords = /(already|completed|done|finished|approved)/i;
-      const riskWords = /(risk|delay|slip|blocked|blocker|could move|issue|problem|late)/i;
-      const deadlineWords = /(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday|next week|by\s+\w+|\d{1,2}\/\d{1,2})/i;
-
-      const tasks = sentences.filter(s => taskWords.test(s) && !doneWords.test(s));
-      const completed = sentences.filter(s => doneWords.test(s));
-      const risks = sentences.filter(s => riskWords.test(s));
-      const deadlines = sentences.filter(s => deadlineWords.test(s));
-
-      const names = [...new Set((clean.match(/\b[A-Z][a-z]{2,}\b/g) || []).filter(n => !['The','This','That','Please','If'].includes(n)))];
-
-      return {
-        summary: sentences.slice(0, 2).join(' '),
-        tasks: tasks.length ? tasks : ['No explicit action item detected.'],
-        completed: completed.length ? completed : ['No completed item explicitly detected.'],
-        owners: names.length ? names : ['No clear owner detected.'],
-        deadlines: deadlines.length ? deadlines : ['No explicit deadline detected.'],
-        risks: risks.length ? risks : ['No explicit risk detected.']
-      };
-    }
-
-    function render(result) {
-      if (!result) {
-        output.innerHTML = '<div class="empty">Enter some work text first.</div>';
-        return;
-      }
-      const list = items => '<ul>' + items.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
-      output.innerHTML =
-        '<div class="result-section"><h3>SUMMARY</h3><p>' + esc(result.summary) + '</p></div>' +
-        '<div class="result-section"><h3>ACTION ITEMS</h3>' + list(result.tasks) + '</div>' +
-        '<div class="result-section"><h3>COMPLETED</h3>' + list(result.completed) + '</div>' +
-        '<div class="result-section"><h3>OWNERS</h3>' + list(result.owners) + '</div>' +
-        '<div class="result-section"><h3>DEADLINES</h3>' + list(result.deadlines) + '</div>' +
-        '<div class="result-section"><h3>RISKS</h3>' + list(result.risks) + '</div>';
-    }
-
-    document.getElementById('analyze').addEventListener('click', () => render(analyzeText(input.value)));
-    document.getElementById('sample').addEventListener('click', () => { input.value = sample; render(analyzeText(sample)); });
-    document.getElementById('clear').addEventListener('click', () => { input.value = ''; output.innerHTML = '<div class="empty">Analysis results will appear here.</div>'; });
+    const input=document.getElementById('input');const output=document.getElementById('output');
+    const sample='Sarah will approve the final design by Friday. Minho needs to update pricing after approval. Launch may slip if approval is delayed. Jisoo has already completed the pricing review. Please confirm the final launch date after approval.';
+    function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+    function analyzeText(text){const clean=text.trim();if(!clean)return null;const sentences=clean.split(/(?<=[.!?])\s+/).filter(Boolean);const taskWords=/(will|need|needs|must|should|please|send|confirm|review|approve|complete|finish|deliver|update|prepare|check)/i;const doneWords=/(already|completed|done|finished|approved)/i;const riskWords=/(risk|delay|slip|blocked|blocker|could move|may slip|issue|problem|late)/i;const deadlineWords=/(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday|next week|by\s+\w+|\d{1,2}\/\d{1,2})/i;const tasks=sentences.filter(s=>taskWords.test(s)&&!doneWords.test(s));const completed=sentences.filter(s=>doneWords.test(s));const risks=sentences.filter(s=>riskWords.test(s));const deadlines=sentences.filter(s=>deadlineWords.test(s));const names=[...new Set((clean.match(/\b[A-Z][a-z]{2,}\b/g)||[]).filter(n=>!['The','This','That','Please','If','Launch'].includes(n)))];return{summary:sentences.slice(0,2).join(' '),tasks:tasks.length?tasks:['No explicit action item detected.'],completed:completed.length?completed:['No completed item explicitly detected.'],owners:names.length?names:['No clear owner detected.'],deadlines:deadlines.length?deadlines:['No explicit deadline detected.'],risks:risks.length?risks:['No explicit risk detected.']};}
+    function render(r){if(!r){output.innerHTML='<div class="panel-title"><strong>Action view</strong><span class="badge">Structured output</span></div><div class="empty">Enter some work text first.</div>';return;}const list=items=>'<ul>'+items.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';output.innerHTML='<div class="panel-title"><strong>Action view</strong><span class="badge">Structured output</span></div><div class="overview"><div class="metric"><span>Tasks</span><strong>'+r.tasks.length+'</strong></div><div class="metric"><span>Owners</span><strong>'+r.owners.length+'</strong></div><div class="metric"><span>Risks</span><strong>'+r.risks.length+'</strong></div></div><div class="result-section"><h3>SUMMARY</h3><p>'+esc(r.summary)+'</p></div><div class="result-section"><h3>ACTION ITEMS</h3>'+list(r.tasks)+'</div><div class="result-section"><h3>OWNERS</h3>'+list(r.owners)+'</div><div class="result-section"><h3>DEADLINES</h3>'+list(r.deadlines)+'</div><div class="result-section"><h3>RISKS</h3>'+list(r.risks)+'</div><div class="result-section"><h3>COMPLETED</h3>'+list(r.completed)+'</div>';}
+    document.getElementById('analyze').addEventListener('click',()=>render(analyzeText(input.value)));document.getElementById('sample').addEventListener('click',()=>{input.value=sample;render(analyzeText(sample));});document.getElementById('clear').addEventListener('click',()=>{input.value='';render(null);});
   </script>
 </body>
 </html>
