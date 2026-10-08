@@ -3,30 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Workflow Analyzer Prototype — AZIS</title>
-  <meta name="description" content="Try the AZIS Workflow Analyzer prototype. Structure project updates, emails, and meeting notes into tasks, owners, deadlines, completed items, and risks." />
+  <title>Proactive Team Agent Demo — AZIS</title>
+  <meta name="description" content="Explore a simulated proactive team agent that spots follow-ups, proposes next steps, and demonstrates approval-based actions." />
   <meta name="robots" content="index,follow,max-snippet:-1" />
   <meta name="theme-color" content="#09100e" />
   <link rel="canonical" href="https://azis.net/demo/" />
   <meta property="og:site_name" content="AZIS" />
-  <meta property="og:title" content="Workflow Analyzer Prototype — AZIS" />
-  <meta property="og:description" content="A public browser-based prototype for turning work updates into structured action signals." />
+  <meta property="og:title" content="Proactive Team Agent Demo — AZIS" />
+  <meta property="og:description" content="A browser-only simulation of a proactive team agent, including follow-up suggestions and approval-based actions." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://azis.net/demo/" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workflow Analyzer Prototype — AZIS" />
-  <meta name="twitter:description" content="Turn work updates into structured tasks, owners, deadlines, and risks in a browser-based prototype." />
+  <meta name="twitter:title" content="Proactive Team Agent Demo — AZIS" />
+  <meta name="twitter:description" content="See simulated team context, proactive follow-up suggestions, and approval-based actions." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "AZIS Workflow Analyzer",
+    "name": "AZIS Proactive Team Agent Demo",
     "url": "https://azis.net/demo/",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web browser",
     "isAccessibleForFree": true,
-    "description": "A public browser-based prototype that structures work notes into tasks, owners, deadlines, completed items, and risks.",
+    "description": "A browser-only simulation of a proactive team agent. Suggestions use fixed scenarios and simple pattern matching; no AI or external integrations.",
     "creator": {
       "@type": "Organization",
       "name": "AZIS",
@@ -43,34 +43,94 @@
     textarea{width:100%;min-height:360px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:#0a120f;color:var(--text);padding:14px;font:inherit}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}button{border:1px solid var(--line);border-radius:10px;padding:11px 15px;font:inherit;font-weight:750;cursor:pointer;background:#15201b;color:var(--text)}button.primary{background:var(--accent);border-color:var(--accent);color:#090d0a}
     .overview{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}.metric{padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel2)}.metric span{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em}.metric strong{display:block;margin-top:3px;font-size:18px}.result-section{padding:15px 0;border-top:1px solid var(--line)}.result-section:first-of-type{border-top:0}.result-section h3{font-size:12px;margin:0 0 8px;color:var(--accent);letter-spacing:.08em}.result-section p,.result-section ul{margin:0;color:#d9e1dc}.result-section ul{padding-left:20px}.empty{color:var(--muted)}footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:13px}
     @media(max-width:860px){.workspace{grid-template-columns:1fr}.overview{grid-template-columns:1fr 1fr}main{padding-top:42px}}@media(max-width:560px){.overview{grid-template-columns:1fr}}
+
+    .feed{display:grid;gap:9px}.message{padding:13px;border:1px solid var(--line);border-radius:11px;background:#0a120f}.message small{display:block;color:var(--muted);margin-bottom:5px}.suggestion{border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0;background:var(--panel2)}.suggestion h3{margin:3px 0 8px;font-size:17px}.suggestion p{color:var(--muted);margin:0}.suggestion .reason{font-size:12px;color:var(--muted);margin-top:9px}.suggestion .actions{margin-top:12px}.result{font-size:13px;color:var(--accent);margin-top:10px}.pill{font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase}.mode{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.mode select{padding:10px;background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:9px}.mini{color:var(--muted);font-size:13px}.panel-title{flex-wrap:wrap}.feed-wrap{max-height:440px;overflow:auto}
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav><a class="brand" href="/">AZIS</a><a class="back" href="/">← Back to AZIS</a></nav>
+
     <main>
-      <div class="eyebrow">Public product prototype</div>
-      <h1>Workflow Analyzer</h1>
-      <p class="lead">Paste a project update, email thread, or meeting note. The prototype organizes it into a concise action view so you can see what needs attention.</p>
-      <div class="notice"><strong>Prototype mode:</strong> no external API calls are made. Processing happens entirely in your browser. This interface demonstrates the workflow AZIS is validating before deeper model integration.</div>
+      <div class="eyebrow">Proactive Team Agent · Interactive concept demo</div>
+      <h1>An AI teammate that keeps work moving.</h1>
+      <p class="lead">Watch a simulated team conversation unfold. AZIS highlights a missing handoff, suggests a next step, and demonstrates an approval-gated action.</p>
+      <div class="notice"><strong>Concept simulation — not a live AI agent.</strong> All team messages are fictional. Suggestions use predefined scenarios or basic text pattern matching in your browser. Approve, dismiss, and simulated execution only update this page; no messages are sent, no tasks are created, and no external APIs or AI models are called.</div>
+      <div class="mode" style="margin-top:24px">
+        <label for="scenario">Team scenario</label>
+        <select id="scenario">
+          <option value="launch">Launch handoff</option>
+          <option value="blocker">Blocked project</option>
+          <option value="decision">Unresolved decision</option>
+        </select>
+        <button class="primary" id="play">Show proactive suggestions</button>
+        <button id="reset">Reset demo</button>
+      </div>
       <div class="workspace">
         <section class="panel">
-          <div class="panel-title"><strong>Work input</strong><span class="badge">Local only</span></div>
-          <textarea id="input" placeholder="Paste a work update here..."></textarea>
-          <div class="actions"><button class="primary" id="analyze">Analyze workflow</button><button id="sample">Load sample</button><button id="clear">Clear</button></div>
+          <div class="panel-title"><strong>Shared team context</strong><span class="badge">Fictional activity</span></div>
+          <div class="feed feed-wrap" id="feed" aria-live="polite"></div>
+          <p class="mini" style="margin-top:18px">Future vision: authorized Slack, Teams, email, and documents. No connections are active here.</p>
         </section>
-        <section class="panel" id="output"><div class="panel-title"><strong>Action view</strong><span class="badge">Structured output</span></div><div class="empty">Load the sample or paste your own text to see the action view.</div></section>
+        <section class="panel" id="output">
+          <div class="panel-title"><strong>AZIS · Proactive suggestions</strong><span class="badge">Simulation</span></div>
+          <div id="suggestions" aria-live="polite"><p class="empty">Choose a scenario and select “Show proactive suggestions.”</p></div>
+        </section>
       </div>
+      <section style="padding:34px 0 0">
+        <div class="panel">
+          <div class="panel-title"><strong>Try your own update</strong><span class="badge">Simple pattern matching · Not AI</span></div>
+          <p class="mini">Paste text to explore basic follow-up suggestions. Results may be incomplete or incorrect and are not connected to your team tools.</p>
+          <textarea id="input" style="min-height:110px" placeholder="Example: Minho needs to update pricing by Friday. The launch may slip if review is delayed."></textarea>
+          <div class="actions"><button id="analyze">Suggest follow-ups</button><button id="sample">Load example</button><button id="clear">Clear</button></div>
+          <div id="custom-output" aria-live="polite" style="margin-top:14px"></div>
+        </div>
+      </section>
     </main>
     <footer>AZIS · South Korea · <a href="mailto:azis@azis.net">azis@azis.net</a></footer>
   </div>
+
   <script>
-    const input=document.getElementById('input');const output=document.getElementById('output');
-    const sample='Sarah will approve the final design by Friday. Minho needs to update pricing after approval. Launch may slip if approval is delayed. Jisoo has already completed the pricing review. Please confirm the final launch date after approval.';
-    function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-    function analyzeText(text){const clean=text.trim();if(!clean)return null;const sentences=clean.split(/(?<=[.!?])\s+/).filter(Boolean);const taskWords=/(will|need|needs|must|should|please|send|confirm|review|approve|complete|finish|deliver|update|prepare|check)/i;const doneWords=/(already|completed|done|finished|approved)/i;const riskWords=/(risk|delay|slip|blocked|blocker|could move|may slip|issue|problem|late)/i;const deadlineWords=/(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday|next week|by\s+\w+|\d{1,2}\/\d{1,2})/i;const tasks=sentences.filter(s=>taskWords.test(s)&&!doneWords.test(s));const completed=sentences.filter(s=>doneWords.test(s));const risks=sentences.filter(s=>riskWords.test(s));const deadlines=sentences.filter(s=>deadlineWords.test(s));const names=[...new Set((clean.match(/\b[A-Z][a-z]{2,}\b/g)||[]).filter(n=>!['The','This','That','Please','If','Launch'].includes(n)))];return{summary:sentences.slice(0,2).join(' '),tasks:tasks.length?tasks:['No explicit action item detected.'],completed:completed.length?completed:['No completed item explicitly detected.'],owners:names.length?names:['No clear owner detected.'],deadlines:deadlines.length?deadlines:['No explicit deadline detected.'],risks:risks.length?risks:['No explicit risk detected.']};}
-    function render(r){if(!r){output.innerHTML='<div class="panel-title"><strong>Action view</strong><span class="badge">Structured output</span></div><div class="empty">Enter some work text first.</div>';return;}const list=items=>'<ul>'+items.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';output.innerHTML='<div class="panel-title"><strong>Action view</strong><span class="badge">Structured output</span></div><div class="overview"><div class="metric"><span>Tasks</span><strong>'+r.tasks.length+'</strong></div><div class="metric"><span>Owners</span><strong>'+r.owners.length+'</strong></div><div class="metric"><span>Risks</span><strong>'+r.risks.length+'</strong></div></div><div class="result-section"><h3>SUMMARY</h3><p>'+esc(r.summary)+'</p></div><div class="result-section"><h3>ACTION ITEMS</h3>'+list(r.tasks)+'</div><div class="result-section"><h3>OWNERS</h3>'+list(r.owners)+'</div><div class="result-section"><h3>DEADLINES</h3>'+list(r.deadlines)+'</div><div class="result-section"><h3>RISKS</h3>'+list(r.risks)+'</div><div class="result-section"><h3>COMPLETED</h3>'+list(r.completed)+'</div>';}
-    document.getElementById('analyze').addEventListener('click',()=>render(analyzeText(input.value)));document.getElementById('sample').addEventListener('click',()=>{input.value=sample;render(analyzeText(sample));});document.getElementById('clear').addEventListener('click',()=>{input.value='';render(null);});
+    const scenarios={
+      launch:{
+        messages:[['#launch · Sarah','Final design approved. We are targeting Friday for release.'],['#pricing · Minho','Pricing update will happen after the design approval.'],['#launch · Jisoo','Pricing review is complete. Waiting for the updated launch checklist.']],
+        suggestions:[{title:'Confirm the pricing handoff',why:'Design was approved, but the pricing update has not been confirmed.',action:'Create a follow-up task for Minho (simulation)'},{title:'Refresh the launch checklist',why:'The team mentioned an updated checklist but no confirmed owner.',action:'Draft a checklist reminder (simulation)'}]},
+      blocker:{
+        messages:[['#engineering · Hana','Integration testing is blocked by missing API access.'],['#release · Alex','We need the test results before Friday.'],['#engineering · Hana','No response yet about API permissions.']],
+        suggestions:[{title:'Escalate the access blocker',why:'Testing is blocked and a release dependency has an upcoming deadline.',action:'Draft an escalation (simulation)'},{title:'Request a revised testing ETA',why:'A dependency remains unresolved before Friday.',action:'Create an ETA request (simulation)'}]},
+      decision:{
+        messages:[['#product · Mina','We should choose between the two onboarding designs.'],['#design · Ben','I sent both options for review yesterday.'],['#product · Mina','No final decision yet, but implementation starts next week.']],
+        suggestions:[{title:'Request the onboarding decision',why:'Implementation is approaching without a confirmed design choice.',action:'Draft a decision request (simulation)'},{title:'Flag an implementation dependency',why:'Engineering needs the design decision before beginning.',action:'Create a dependency note (simulation)'}]}
+    };
+    const feed=document.getElementById('feed'),suggestions=document.getElementById('suggestions'),custom=document.getElementById('custom-output');
+    const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    let state=[];
+    function reset(){
+      const scenario=scenarios[document.getElementById('scenario').value];
+      feed.innerHTML=scenario.messages.map(m=>'<div class="message"><small>'+esc(m[0])+'</small>'+esc(m[1])+'</div>').join('');
+      state=[];suggestions.innerHTML='<p class="empty">Team context loaded. Select “Show proactive suggestions” to simulate agent activity.</p>';
+    }
+    function render(){
+      suggestions.innerHTML=state.map((item,i)=>'<article class="suggestion"><div class="pill">Proactive insight · Simulated</div><h3>'+esc(item.title)+'</h3><p>'+esc(item.why)+'</p><div class="reason">Proposed action: '+esc(item.action)+'</div>'+(item.status==='open'?'<div class="actions"><button class="primary" data-action="approve" data-index="'+i+'">Approve simulated action</button><button data-action="dismiss" data-index="'+i+'">Dismiss</button></div>':'<div class="result" role="status">'+esc(item.status==='approved'?'Approved — action recorded in this demo only. No external changes were made.':'Dismissed — no action taken.')+'</div>')+'</article>').join('');
+    }
+    document.getElementById('play').addEventListener('click',()=>{reset();state=scenarios[document.getElementById('scenario').value].suggestions.map(x=>({...x,status:'open'}));render();});
+    document.getElementById('scenario').addEventListener('change',reset);
+    document.getElementById('reset').addEventListener('click',()=>{reset();document.getElementById('input').value='';custom.textContent='';});
+    suggestions.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const i=Number(b.dataset.index);if(!state[i]||state[i].status!=='open')return;state[i].status=b.dataset.action==='approve'?'approved':'dismissed';render();});
+    document.getElementById('analyze').addEventListener('click',()=>{
+      const t=document.getElementById('input').value.trim();
+      if(!t){custom.textContent='Enter a work update first.';return;}
+      const patterns=[
+        {test:/\b(blocked|blocker|waiting|delay|slip|stuck)\b/i,title:'Check a possible blocker',why:'A possible blocker or delay was mentioned.'},
+        {test:/\b(need|needs|should|must|please|follow.up|update|confirm)\b/i,title:'Confirm the next action and owner',why:'An action or request was mentioned.'},
+        {test:/\b(friday|monday|tuesday|wednesday|thursday|today|tomorrow|next week|deadline|by \w+)\b/i,title:'Check the commitment date',why:'A possible timing commitment was mentioned.'}
+      ];
+      const matches=patterns.filter(p=>p.test(t));
+      custom.innerHTML='<div class="pill">Rule-based suggestions · Not AI</div>'+(matches.length?matches.map(p=>'<div class="suggestion"><h3>'+esc(p.title)+'</h3><p>'+esc(p.why)+'</p></div>').join(''):'<p class="mini">No supported pattern detected. This does not mean no follow-up is needed.</p>');
+    });
+    document.getElementById('sample').addEventListener('click',()=>{document.getElementById('input').value='Minho needs to update pricing by Friday. Launch may slip if approval is delayed.';document.getElementById('analyze').click();});
+    document.getElementById('clear').addEventListener('click',()=>{document.getElementById('input').value='';custom.textContent='';});
+    reset();
   </script>
 </body>
 </html>
